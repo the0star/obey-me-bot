@@ -1,0 +1,22 @@
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 0;
+}
+
+header {
+  margin-left: 2em;
+}
+
+footer {
+  margin-left: 2em;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
