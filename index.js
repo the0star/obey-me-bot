@@ -13,16 +13,17 @@ app.get("/", (request, response) => {
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 280000);
 
 /* Bot */
 const prefix = ".";
 
 const fs = require("fs");
+
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const { Client, Intents } = require("discord.js");
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+});
 client.commands = new Discord.Collection();
 
 const commandFiles = fs
@@ -36,9 +37,10 @@ for (const file of commandFiles) {
 
 /* Commands */
 client.once("ready", () => {
-  client.user.setActivity("Devilgram, the retired bot, used to be cool.");
   console.log(`${client.user.tag} is ready!`);
 
+  /*
+  client.user.setActivity("Devilgram, the retired bot, used to be cool.");
   let things2do = [
     "how to become a devilgram star like asmo",
     "ASMR with Beel",
@@ -57,6 +59,7 @@ client.once("ready", () => {
       client.user.setActivity("Cranesanity", { type: "PLAYING" });
     }
   }, 25 * 60 * 1000);
+  */
 });
 
 client.on("message", async (message) => {
