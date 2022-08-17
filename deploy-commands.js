@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
-const { clientId, guildId, token } = require("./config.json");
+// const { clientId, guildId, token } = require("./config.json");
 
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");
@@ -16,7 +16,7 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: "10" }).setToken(token);
+const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 // rest
 //   .put(Routes.applicationCommands(clientId), { body: commands })
@@ -27,9 +27,9 @@ const rest = new REST({ version: "10" }).setToken(token);
   try {
     console.log("Started refreshing application (/) commands.");
 
-    console.log(clientId);
+    console.log(process.env.CLIENT_ID);
     
-    await rest.put(Routes.applicationCommands(clientId), { body: commands });
+    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: commands });
 
     console.log("Successfully reloaded application (/) commands.");
   } catch (error) {
