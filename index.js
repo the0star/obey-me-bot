@@ -5,7 +5,6 @@ const app = express();
 
 app.use(express.static("public"));
 app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
   // response.sendStatus(200);
   response.sendFile(__dirname + "/views/index.html");
 });
@@ -14,66 +13,47 @@ const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
-/* Bot */
-const prefix = ".";
+/**/
 
-const fs = require("fs");
+const fs = require("node:fs");
+const path = require("node:path");
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { token } = require("./config.json");
 
-const Discord = require("discord.js");
-const { Client, Intents } = require("discord.js");
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
-});
-client.commands = new Discord.Collection();
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
-  .readdirSync("./commands")
+  .readdirSync(commandsPath)
   .filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath);
+  client.commands.set(command.data.name, command);
 }
 
-/* Commands */
 client.once("ready", () => {
-  console.log(`${client.user.tag} is ready!`);
-
-  /*
-  client.user.setActivity("Devilgram, the retired bot, used to be cool.");
-  let things2do = [
-    "how to become a devilgram star like asmo",
-    "ASMR with Beel",
-    "Levi Gaming Hour",
-    "Become rich with Mammon: how to become rich by turning someone else in to a famous DevilTuber",
-  ];
-
-  let activity = 0;
-  setInterval(function () {
-    activity = Math.round(Math.random() * things2do.length - 1);
-
-    // hard coding this part because brain is lazy
-    if (activity > 0) {
-      client.user.setActivity(`${things2do[activity]}`, { type: "WATCHING" });
-    } else {
-      client.user.setActivity("Cranesanity", { type: "PLAYING" });
-    }
-  }, 25 * 60 * 1000);
-  */
+  console.log("Ready!");
 });
 
-client.on("message", async (message) => {
-  if (message.author.bot || !message.content.startsWith(prefix)) return;
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
 
-  const args = message.content.slice(prefix.length).split(/ +/);
-  const command = args.shift().toLowerCase();
+  const command = client.commands.get(interaction.commandName);
+
+  if (!command) return;
 
   try {
-    client.commands.get(command).execute(message, args);
+    await command.execute(interaction);
   } catch (error) {
     console.error(error);
-    // message.reply("there was an error trying to execute that command!");
+    await interaction.reply({
+      content: "There was an error while executing this command!",
+      ephemeral: true,
+    });
   }
 });
 
-client.login(process.env.TOKEN);
+client.login(token);
