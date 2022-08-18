@@ -1,3 +1,3 @@
-const initWebpage = require("./webpage.js");
-const initDiscordBot = require("./discordBot.js");
-// const twitterListener = require("./twitterListener.js");
+require("./webpage.js");
+require("./discordBot.js");
+require("./twitterListener.js");
