@@ -162,7 +162,7 @@ function streamConnect(retryAttempt) {
     console.error(e);
     process.exit(1);
   }
-
+  
   // Listen to the stream.
   streamConnect(0);
 })();
