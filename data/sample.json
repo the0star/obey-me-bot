@@ -1,0 +1,18 @@
+{
+  "data": {
+    "author_id": "886334035039047680",
+    "id": "1560353623221092356",
+    "text": "ITS TIME https://t.co/PXk73ObpGP"
+  },
+  "includes": {
+    "users": [
+      { "id": "886334035039047680", "name": "🐗", "username": "NeoxAspect" },
+      {
+        "id": "845407654654738432",
+        "name": "Fate/Grand Order USA",
+        "username": "FateGO_USA"
+      }
+    ]
+  },
+  "matching_rules": [{ "id": "1560353441851097090", "tag": "cat pictures" }]
+}

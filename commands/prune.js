@@ -16,6 +16,7 @@ module.exports = {
         ephemeral: true,
       });
     }
+
     await interaction.channel.bulkDelete(amount, true).catch((error) => {
       console.error(error);
       interaction.reply({

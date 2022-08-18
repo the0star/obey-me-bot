@@ -18,18 +18,15 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
-// rest
-//   .put(Routes.applicationCommands(clientId), { body: commands })
-//   .then(() => console.log("Successfully registered application commands."))
-//   .catch(console.error);
-
 (async () => {
   try {
     console.log("Started refreshing application (/) commands.");
 
     console.log(process.env.CLIENT_ID);
-    
-    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: commands });
+
+    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
+      body: commands,
+    });
 
     console.log("Successfully reloaded application (/) commands.");
   } catch (error) {

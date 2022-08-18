@@ -39,7 +39,6 @@ for (const file of commandFiles) {
 client.once("ready", () => {
   console.log(`${client.user.tag} is ready!`);
 
-  /*
   client.user.setActivity("Devilgram, the retired bot, used to be cool.");
   let things2do = [
     "how to become a devilgram star like asmo",
@@ -59,7 +58,6 @@ client.once("ready", () => {
       client.user.setActivity("Cranesanity", { type: "PLAYING" });
     }
   }, 25 * 60 * 1000);
-  */
 });
 
 client.on("message", async (message) => {
