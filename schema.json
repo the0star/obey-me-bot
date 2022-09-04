@@ -1,0 +1,17 @@
+{
+  "info": {},
+  "settings": {
+    "channels": {
+      "ja_news": {
+        "channelId": "channelId",
+        "message": "Message with %link, or leave blank for just link"
+      },
+      "en_news": {
+        "channelId": "channelId",
+        "message": "Message with %link, or leave blank for just link"
+      },
+      "countdowns": "channelId"
+    },
+    "discovery": false
+  }
+}

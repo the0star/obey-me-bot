@@ -6,10 +6,25 @@ const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 /* #region Functions */
-exports.sendMsg = function (msg) {
-  const channel = client.channels.cache.get("948750149776183396");
+exports.sendMsg = function (channelId, msg) {
+  const channel = client.channels.cache.get(channelId);
   channel.send(msg);
-  return;
+};
+
+// exports.getInvites = function (guildId) {
+//   const guild = client.guilds.cache.get(guildId);
+//   guild.invites.fetch().then(console.log).catch(console.error);
+// };
+
+exports.setServerDiscovery = function (guildId, channelId, val) {
+  const guild = client.guilds.cache.get(guildId);
+  guild.setWidgetSettings(
+    {
+      enabled: val,
+      channel_id: channelId,
+    },
+    "Set server discovery to " + val
+  );
 };
 /* #endregion */
 

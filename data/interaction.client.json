@@ -1,0 +1,135 @@
+{
+  "options": {
+    "intents": 1,
+    "closeTimeout": 5000,
+    "waitGuildTimeout": 15000,
+    "shardCount": 1,
+    "partials": [],
+    "failIfNotExists": true,
+    "presence": { "status": "online", "user": { "id": null } },
+    "sweepers": { "threads": { "interval": 3600, "lifetime": 14400 } },
+    "ws": {
+      "large_threshold": 50,
+      "compress": false,
+      "properties": {
+        "os": "linux",
+        "browser": "discord.js",
+        "device": "discord.js"
+      },
+      "version": 10,
+      "presence": {
+        "activities": [],
+        "afk": false,
+        "since": null,
+        "status": "online"
+      }
+    },
+    "rest": {
+      "agent": {},
+      "api": "https://discord.com/api",
+      "authPrefix": "Bot",
+      "cdn": "https://cdn.discordapp.com",
+      "headers": {},
+      "invalidRequestWarningInterval": 0,
+      "globalRequestsPerSecond": 50,
+      "offset": 50,
+      "rejectOnRateLimit": null,
+      "retries": 3,
+      "timeout": 15000,
+      "userAgentAppendix": "Node.js v16.14.2",
+      "version": "10",
+      "hashSweepInterval": 14400000,
+      "hashLifetime": 86400000,
+      "handlerSweepInterval": 3600000
+    },
+    "shards": [0]
+  },
+  "rest": {
+    "cdn": { "base": "https://cdn.discordapp.com" },
+    "requestManager": {
+      "agent": {},
+      "globalDelay": null,
+      "globalReset": 1660921744193,
+      "hashes": ["GET:/gateway/bot"],
+      "handlers": [
+        "Global(GET:/gateway/bot):global",
+        "Global(POST:/interactions/:id/aW50ZXJhY3Rpb246MTAxMDIwMzc1MjAwOTA1NjI2NjoxT3BkZ3NSQnJDRHdYQzhqZDJkN1Y5aDg2MzJyMk85dkNnVXEzNGRiN01iODdLdW9XMW1kQ1RRODkwNFVEYldOUG5CYVVSVzY4ckFhSWFDcWpXblY4c0RYbmV4U2JZOGY3YVl5MGUxSERyWWEzUFJCangwT3IxZExhV3Y3VU9hSg/callback):global"
+      ],
+      "options": {
+        "agent": {},
+        "api": "https://discord.com/api",
+        "authPrefix": "Bot",
+        "cdn": "https://cdn.discordapp.com",
+        "headers": {},
+        "invalidRequestWarningInterval": 0,
+        "globalRequestsPerSecond": 50,
+        "offset": 50,
+        "rejectOnRateLimit": null,
+        "retries": 3,
+        "timeout": 15000,
+        "userAgentAppendix": "Node.js v16.14.2",
+        "version": "10",
+        "hashSweepInterval": 14400000,
+        "hashLifetime": 86400000,
+        "handlerSweepInterval": 3600000
+      },
+      "globalRemaining": 49,
+      "hashTimer": {},
+      "handlerTimer": {}
+    }
+  },
+  "ws": {
+    "gateway": "wss://gateway.discord.gg/",
+    "totalShards": 1,
+    "shards": [0],
+    "status": 0,
+    "destroyed": false,
+    "reconnecting": false
+  },
+  "voice": { "adapters": {} },
+  "shard": null,
+  "users": ["1009238674237554738", "1009979765941338185"],
+  "guilds": ["666858577209720854", "1009578164625879100"],
+  "channels": [
+    "666858577675419648",
+    "673339200782729276",
+    "689205543591739674",
+    "701532528439459950",
+    "706232039455850676",
+    "742761217310982224",
+    "895741349184274562",
+    "913478999546679306",
+    "948750149776183396",
+    "1009578164625879103",
+    "1009578773139693650",
+    "1009578773139693651",
+    "1009579283959775272",
+    "1009598999029891142",
+    "1009599337090777129",
+    "1010033113231016036",
+    "1010033459663732829"
+  ],
+  "sweepers": {
+    "options": { "threads": { "interval": 3600, "lifetime": 14400 } },
+    "intervals": {
+      "applicationCommands": null,
+      "bans": null,
+      "emojis": null,
+      "invites": null,
+      "guildMembers": null,
+      "messages": null,
+      "presences": null,
+      "reactions": null,
+      "stageInstances": null,
+      "stickers": null,
+      "threadMembers": null,
+      "threads": {},
+      "users": null,
+      "voiceStates": null
+    }
+  },
+  "user": "1009238674237554738",
+  "application": "1009238674237554738",
+  "readyTimestamp": 1660921740098,
+  "commands": ["ping", "prune"]
+}

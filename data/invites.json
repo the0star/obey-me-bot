@@ -1,0 +1,683 @@
+Collection(4) [Map] {
+
+  '55EWVZCf' => Invite {
+
+    guild: Guild {
+
+      id: '1009578164625879100',
+
+      name: 'RAD Newspaper Club1',
+
+      icon: 'ce517985d3e65c50fa174ba8841b8523',
+
+      features: [Array],
+
+      commands: [GuildApplicationCommandManager],
+
+      members: [GuildMemberManager],
+
+      channels: [GuildChannelManager],
+
+      bans: [GuildBanManager],
+
+      roles: [RoleManager],
+
+      presences: PresenceManager {},
+
+      voiceStates: [VoiceStateManager],
+
+      stageInstances: [StageInstanceManager],
+
+      invites: [GuildInviteManager],
+
+      scheduledEvents: [GuildScheduledEventManager],
+
+      available: true,
+
+      shardId: 0,
+
+      splash: null,
+
+      banner: null,
+
+      description: null,
+
+      verificationLevel: 1,
+
+      vanityURLCode: null,
+
+      nsfwLevel: 0,
+
+      premiumSubscriptionCount: 0,
+
+      discoverySplash: null,
+
+      memberCount: 3,
+
+      large: false,
+
+      premiumProgressBarEnabled: false,
+
+      applicationId: null,
+
+      afkTimeout: 300,
+
+      afkChannelId: null,
+
+      systemChannelId: '1009578164625879103',
+
+      premiumTier: 0,
+
+      explicitContentFilter: 2,
+
+      mfaLevel: 0,
+
+      joinedTimestamp: 1660922529122,
+
+      defaultMessageNotifications: 1,
+
+      systemChannelFlags: [SystemChannelFlagsBitField],
+
+      maximumMembers: 500000,
+
+      maximumPresences: null,
+
+      maxVideoChannelUsers: 25,
+
+      approximateMemberCount: null,
+
+      approximatePresenceCount: null,
+
+      vanityURLUses: null,
+
+      rulesChannelId: '1009578773139693650',
+
+      publicUpdatesChannelId: '1009578773139693651',
+
+      preferredLocale: 'en-US',
+
+      ownerId: '1009979765941338185',
+
+      emojis: [GuildEmojiManager],
+
+      stickers: [GuildStickerManager]
+
+    },
+
+    code: '55EWVZCf',
+
+    presenceCount: null,
+
+    memberCount: null,
+
+    temporary: false,
+
+    maxAge: 604800,
+
+    uses: 0,
+
+    maxUses: 0,
+
+    inviterId: '1009979765941338185',
+
+    targetUser: null,
+
+    targetApplication: null,
+
+    targetType: null,
+
+    channel: TextChannel {
+
+      type: 0,
+
+      guild: [Guild],
+
+      guildId: '1009578164625879100',
+
+      parentId: '1009599337090777129',
+
+      permissionOverwrites: [PermissionOverwriteManager],
+
+      messages: [MessageManager],
+
+      threads: [ThreadManager],
+
+      nsfw: false,
+
+      id: '1009578164625879103',
+
+      name: 'general',
+
+      rawPosition: 6,
+
+      topic: null,
+
+      lastMessageId: '1010207048912343102',
+
+      rateLimitPerUser: 0
+
+    },
+
+    channelId: '1009578164625879103',
+
+    createdTimestamp: 1660919488159,
+
+    _expiresTimestamp: 1661524288000,
+
+    stageInstance: null,
+
+    guildScheduledEvent: null
+
+  },
+
+  'GQnUSMVj9y' => Invite {
+
+    guild: Guild {
+
+      id: '1009578164625879100',
+
+      name: 'RAD Newspaper Club1',
+
+      icon: 'ce517985d3e65c50fa174ba8841b8523',
+
+      features: [Array],
+
+      commands: [GuildApplicationCommandManager],
+
+      members: [GuildMemberManager],
+
+      channels: [GuildChannelManager],
+
+      bans: [GuildBanManager],
+
+      roles: [RoleManager],
+
+      presences: PresenceManager {},
+
+      voiceStates: [VoiceStateManager],
+
+      stageInstances: [StageInstanceManager],
+
+      invites: [GuildInviteManager],
+
+      scheduledEvents: [GuildScheduledEventManager],
+
+      available: true,
+
+      shardId: 0,
+
+      splash: null,
+
+      banner: null,
+
+      description: null,
+
+      verificationLevel: 1,
+
+      vanityURLCode: null,
+
+      nsfwLevel: 0,
+
+      premiumSubscriptionCount: 0,
+
+      discoverySplash: null,
+
+      memberCount: 3,
+
+      large: false,
+
+      premiumProgressBarEnabled: false,
+
+      applicationId: null,
+
+      afkTimeout: 300,
+
+      afkChannelId: null,
+
+      systemChannelId: '1009578164625879103',
+
+      premiumTier: 0,
+
+      explicitContentFilter: 2,
+
+      mfaLevel: 0,
+
+      joinedTimestamp: 1660922529122,
+
+      defaultMessageNotifications: 1,
+
+      systemChannelFlags: [SystemChannelFlagsBitField],
+
+      maximumMembers: 500000,
+
+      maximumPresences: null,
+
+      maxVideoChannelUsers: 25,
+
+      approximateMemberCount: null,
+
+      approximatePresenceCount: null,
+
+      vanityURLUses: null,
+
+      rulesChannelId: '1009578773139693650',
+
+      publicUpdatesChannelId: '1009578773139693651',
+
+      preferredLocale: 'en-US',
+
+      ownerId: '1009979765941338185',
+
+      emojis: [GuildEmojiManager],
+
+      stickers: [GuildStickerManager]
+
+    },
+
+    code: 'GQnUSMVj9y',
+
+    presenceCount: null,
+
+    memberCount: null,
+
+    temporary: false,
+
+    maxAge: 0,
+
+    uses: 0,
+
+    maxUses: 0,
+
+    inviterId: '1009979765941338185',
+
+    targetUser: null,
+
+    targetApplication: null,
+
+    targetType: null,
+
+    channel: TextChannel {
+
+      type: 0,
+
+      guild: [Guild],
+
+      guildId: '1009578164625879100',
+
+      parentId: '1009599337090777129',
+
+      permissionOverwrites: [PermissionOverwriteManager],
+
+      messages: [MessageManager],
+
+      threads: [ThreadManager],
+
+      nsfw: false,
+
+      id: '1009578164625879103',
+
+      name: 'general',
+
+      rawPosition: 6,
+
+      topic: null,
+
+      lastMessageId: '1010207048912343102',
+
+      rateLimitPerUser: 0
+
+    },
+
+    channelId: '1009578164625879103',
+
+    createdTimestamp: 1660919516710,
+
+    _expiresTimestamp: null,
+
+    stageInstance: null,
+
+    guildScheduledEvent: null
+
+  },
+
+  'P4mSJvFk' => Invite {
+
+    guild: Guild {
+
+      id: '1009578164625879100',
+
+      name: 'RAD Newspaper Club1',
+
+      icon: 'ce517985d3e65c50fa174ba8841b8523',
+
+      features: [Array],
+
+      commands: [GuildApplicationCommandManager],
+
+      members: [GuildMemberManager],
+
+      channels: [GuildChannelManager],
+
+      bans: [GuildBanManager],
+
+      roles: [RoleManager],
+
+      presences: PresenceManager {},
+
+      voiceStates: [VoiceStateManager],
+
+      stageInstances: [StageInstanceManager],
+
+      invites: [GuildInviteManager],
+
+      scheduledEvents: [GuildScheduledEventManager],
+
+      available: true,
+
+      shardId: 0,
+
+      splash: null,
+
+      banner: null,
+
+      description: null,
+
+      verificationLevel: 1,
+
+      vanityURLCode: null,
+
+      nsfwLevel: 0,
+
+      premiumSubscriptionCount: 0,
+
+      discoverySplash: null,
+
+      memberCount: 3,
+
+      large: false,
+
+      premiumProgressBarEnabled: false,
+
+      applicationId: null,
+
+      afkTimeout: 300,
+
+      afkChannelId: null,
+
+      systemChannelId: '1009578164625879103',
+
+      premiumTier: 0,
+
+      explicitContentFilter: 2,
+
+      mfaLevel: 0,
+
+      joinedTimestamp: 1660922529122,
+
+      defaultMessageNotifications: 1,
+
+      systemChannelFlags: [SystemChannelFlagsBitField],
+
+      maximumMembers: 500000,
+
+      maximumPresences: null,
+
+      maxVideoChannelUsers: 25,
+
+      approximateMemberCount: null,
+
+      approximatePresenceCount: null,
+
+      vanityURLUses: null,
+
+      rulesChannelId: '1009578773139693650',
+
+      publicUpdatesChannelId: '1009578773139693651',
+
+      preferredLocale: 'en-US',
+
+      ownerId: '1009979765941338185',
+
+      emojis: [GuildEmojiManager],
+
+      stickers: [GuildStickerManager]
+
+    },
+
+    code: 'P4mSJvFk',
+
+    presenceCount: null,
+
+    memberCount: null,
+
+    temporary: false,
+
+    maxAge: 604800,
+
+    uses: 0,
+
+    maxUses: 0,
+
+    inviterId: '1009979765941338185',
+
+    targetUser: null,
+
+    targetApplication: null,
+
+    targetType: null,
+
+    channel: TextChannel {
+
+      type: 0,
+
+      guild: [Guild],
+
+      guildId: '1009578164625879100',
+
+      parentId: null,
+
+      permissionOverwrites: [PermissionOverwriteManager],
+
+      messages: [MessageManager],
+
+      threads: [ThreadManager],
+
+      nsfw: false,
+
+      id: '1009578773139693650',
+
+      name: 'rules',
+
+      rawPosition: 0,
+
+      topic: null,
+
+      lastMessageId: '1010034830794293309',
+
+      rateLimitPerUser: 0
+
+    },
+
+    channelId: '1009578773139693650',
+
+    createdTimestamp: 1660918904479,
+
+    _expiresTimestamp: 1661523704000,
+
+    stageInstance: null,
+
+    guildScheduledEvent: null
+
+  },
+
+  'SQan9C6Y' => Invite {
+
+    guild: Guild {
+
+      id: '1009578164625879100',
+
+      name: 'RAD Newspaper Club1',
+
+      icon: 'ce517985d3e65c50fa174ba8841b8523',
+
+      features: [Array],
+
+      commands: [GuildApplicationCommandManager],
+
+      members: [GuildMemberManager],
+
+      channels: [GuildChannelManager],
+
+      bans: [GuildBanManager],
+
+      roles: [RoleManager],
+
+      presences: PresenceManager {},
+
+      voiceStates: [VoiceStateManager],
+
+      stageInstances: [StageInstanceManager],
+
+      invites: [GuildInviteManager],
+
+      scheduledEvents: [GuildScheduledEventManager],
+
+      available: true,
+
+      shardId: 0,
+
+      splash: null,
+
+      banner: null,
+
+      description: null,
+
+      verificationLevel: 1,
+
+      vanityURLCode: null,
+
+      nsfwLevel: 0,
+
+      premiumSubscriptionCount: 0,
+
+      discoverySplash: null,
+
+      memberCount: 3,
+
+      large: false,
+
+      premiumProgressBarEnabled: false,
+
+      applicationId: null,
+
+      afkTimeout: 300,
+
+      afkChannelId: null,
+
+      systemChannelId: '1009578164625879103',
+
+      premiumTier: 0,
+
+      explicitContentFilter: 2,
+
+      mfaLevel: 0,
+
+      joinedTimestamp: 1660922529122,
+
+      defaultMessageNotifications: 1,
+
+      systemChannelFlags: [SystemChannelFlagsBitField],
+
+      maximumMembers: 500000,
+
+      maximumPresences: null,
+
+      maxVideoChannelUsers: 25,
+
+      approximateMemberCount: null,
+
+      approximatePresenceCount: null,
+
+      vanityURLUses: null,
+
+      rulesChannelId: '1009578773139693650',
+
+      publicUpdatesChannelId: '1009578773139693651',
+
+      preferredLocale: 'en-US',
+
+      ownerId: '1009979765941338185',
+
+      emojis: [GuildEmojiManager],
+
+      stickers: [GuildStickerManager]
+
+    },
+
+    code: 'SQan9C6Y',
+
+    presenceCount: null,
+
+    memberCount: null,
+
+    temporary: false,
+
+    maxAge: 604800,
+
+    uses: 1,
+
+    maxUses: 0,
+
+    inviterId: '847576727215407155',
+
+    targetUser: null,
+
+    targetApplication: null,
+
+    targetType: null,
+
+    channel: TextChannel {
+
+      type: 0,
+
+      guild: [Guild],
+
+      guildId: '1009578164625879100',
+
+      parentId: '1009599337090777129',
+
+      permissionOverwrites: [PermissionOverwriteManager],
+
+      messages: [MessageManager],
+
+      threads: [ThreadManager],
+
+      nsfw: false,
+
+      id: '1009578164625879103',
+
+      name: 'general',
+
+      rawPosition: 6,
+
+      topic: null,
+
+      lastMessageId: '1010207048912343102',
+
+      rateLimitPerUser: 0
+
+    },
+
+    channelId: '1009578164625879103',
+
+    createdTimestamp: 1660868558271,
+
+    _expiresTimestamp: 1661473358000,
+
+    stageInstance: null,
+
+    guildScheduledEvent: null
+
+  }
+
+}

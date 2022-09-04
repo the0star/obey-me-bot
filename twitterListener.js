@@ -112,7 +112,8 @@ function streamConnect(retryAttempt) {
         const tweetId = json.data.id;
         const username = json.includes.users.find(x => x.id == json.data.author_id).username;
         
-        discordController.sendMsg(`https://twitter.com/${username}/status/${tweetId}`);
+        // let channelId = '';
+        // discordController.sendMsg(channelId, `https://twitter.com/${username}/status/${tweetId}`);
 
         // A successful connection resets retry count.
         retryAttempt = 0;
