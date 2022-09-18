@@ -1,0 +1,213 @@
+ChatInputCommandInteraction {
+
+  type: 2,
+
+  id: '1016113795237691433',
+
+  applicationId: '1009238674237554738',
+
+  channelId: '948750149776183396',
+
+  guildId: '666858577209720854',
+
+  user: User {
+
+    id: '847576727215407155',
+
+    bot: false,
+
+    system: false,
+
+    flags: UserFlagsBitField { bitfield: 0 },
+
+    username: 'char',
+
+    discriminator: '3020',
+
+    avatar: '643e251d82321607242cda56ee8591ce',
+
+    banner: undefined,
+
+    accentColor: undefined
+
+  },
+
+  member: GuildMember {
+
+    guild: Guild {
+
+      id: '666858577209720854',
+
+      name: 'alphaServer',
+
+      icon: 'b29aa889911dc1fd64f4ca23323956fa',
+
+      features: [Array],
+
+      commands: [GuildApplicationCommandManager],
+
+      members: [GuildMemberManager],
+
+      channels: [GuildChannelManager],
+
+      bans: [GuildBanManager],
+
+      roles: [RoleManager],
+
+      presences: PresenceManager {},
+
+      voiceStates: [VoiceStateManager],
+
+      stageInstances: [StageInstanceManager],
+
+      invites: [GuildInviteManager],
+
+      scheduledEvents: [GuildScheduledEventManager],
+
+      available: true,
+
+      shardId: 0,
+
+      splash: null,
+
+      banner: null,
+
+      description: null,
+
+      verificationLevel: 1,
+
+      vanityURLCode: null,
+
+      nsfwLevel: 0,
+
+      premiumSubscriptionCount: 0,
+
+      discoverySplash: null,
+
+      memberCount: 7,
+
+      large: false,
+
+      premiumProgressBarEnabled: false,
+
+      applicationId: null,
+
+      afkTimeout: 300,
+
+      afkChannelId: null,
+
+      systemChannelId: '689205543591739674',
+
+      premiumTier: 0,
+
+      explicitContentFilter: 2,
+
+      mfaLevel: 0,
+
+      joinedTimestamp: 1660698048502,
+
+      defaultMessageNotifications: 0,
+
+      systemChannelFlags: [SystemChannelFlagsBitField],
+
+      maximumMembers: 250000,
+
+      maximumPresences: null,
+
+      maxVideoChannelUsers: 25,
+
+      approximateMemberCount: null,
+
+      approximatePresenceCount: null,
+
+      vanityURLUses: null,
+
+      rulesChannelId: null,
+
+      publicUpdatesChannelId: null,
+
+      preferredLocale: 'en-US',
+
+      ownerId: '884599715541442600',
+
+      emojis: [GuildEmojiManager],
+
+      stickers: [GuildStickerManager]
+
+    },
+
+    joinedTimestamp: 1622149228871,
+
+    premiumSinceTimestamp: null,
+
+    nickname: null,
+
+    pending: false,
+
+    communicationDisabledUntilTimestamp: null,
+
+    _roles: [ '720740478466916415' ],
+
+    user: User {
+
+      id: '847576727215407155',
+
+      bot: false,
+
+      system: false,
+
+      flags: [UserFlagsBitField],
+
+      username: 'char',
+
+      discriminator: '3020',
+
+      avatar: '643e251d82321607242cda56ee8591ce',
+
+      banner: undefined,
+
+      accentColor: undefined
+
+    },
+
+    avatar: null
+
+  },
+
+  version: 1,
+
+  appPermissions: PermissionsBitField { bitfield: 275146599537n },
+
+  memberPermissions: PermissionsBitField { bitfield: 4398046511103n },
+
+  locale: 'en-GB',
+
+  guildLocale: 'en-US',
+
+  commandId: '1016113142318764134',
+
+  commandName: 'twitter',
+
+  commandType: 1,
+
+  commandGuildId: null,
+
+  deferred: false,
+
+  replied: false,
+
+  ephemeral: null,
+
+  webhook: InteractionWebhook { id: '1009238674237554738' },
+
+  options: CommandInteractionOptionResolver {
+
+    _group: null,
+
+    _subcommand: 'remove',
+
+    _hoistedOptions: []
+
+  }
+
+}

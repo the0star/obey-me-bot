@@ -1,7 +1,8 @@
 // https://github.com/twitterdev/Twitter-API-v2-sample-code/blob/main/Filtered-Stream/filtered_stream.js
 
 const needle = require("needle");
-const discordController = require("./discordBot.js");
+const db = require("./mongodbInit");
+const discordController = require("./discordBot");
 
 const token = process.env.BEARER_TOKEN;
 
@@ -10,23 +11,11 @@ const streamURL =
   "https://api.twitter.com/2/tweets/search/stream?expansions=author_id";
 
 const rules = [
-  // {
-  //   value: "dog has:images -is:retweet",
-  //   tag: "dog pictures",
-  // },
-  // {
-  //   value: "cat has:images -grumpy",
-  //   tag: "cat pictures",
-  // },
-  // {
-  //   value: "cat sample:5",
-  //   tag: "cat pictures",
-  // },
   {
-    value: "from:ObeyMeOfficial -is:retweet -is:reply",
+    value: "from:ObeyMeOfficial -is:reply",  // -is:retweet 
   },
   {
-    value: "from:ObeyMeOfficial1 -is:retweet -is:reply",
+    value: "from:ObeyMeOfficial1 -is:reply",  // -is:retweet 
   },
 ];
 
@@ -112,8 +101,7 @@ function streamConnect(retryAttempt) {
         const tweetId = json.data.id;
         const username = json.includes.users.find(x => x.id == json.data.author_id).username;
         
-        // let channelId = '';
-        // discordController.sendMsg(channelId, `https://twitter.com/${username}/status/${tweetId}`);
+        // await discordController.sendTwitterUpdates(`https://twitter.com/${username}/status/${tweetId}`);
 
         // A successful connection resets retry count.
         retryAttempt = 0;

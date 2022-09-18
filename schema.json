@@ -2,13 +2,13 @@
   "info": {},
   "settings": {
     "channels": {
-      "ja_news": {
+      "jaNews": {
         "channelId": "channelId",
-        "message": "Message with %link, or leave blank for just link"
+        "message": "Message before the link, discord syntax allowed"
       },
-      "en_news": {
+      "enNews": {
         "channelId": "channelId",
-        "message": "Message with %link, or leave blank for just link"
+        "message": "Message before the link, discord syntax allowed"
       },
       "countdowns": "channelId"
     },

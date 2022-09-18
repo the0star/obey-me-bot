@@ -44,6 +44,10 @@ async function roll(source, rarity) {
     };
   } catch (e) {
     console.error("Error:", e);
+    return {
+      name: "Little_D._of_Pride_(Pride)",
+      rarity: "N"
+    }
   }
 }
 
@@ -55,7 +59,7 @@ function getRandomInt(min, max) {
 
 function rollRarity() {
   let r = getRandomInt(0, 100);
-  console.log(r)
+  console.log(r);
   if (r < 3) {
     return 4;
   } else if (r < 9 + 3) {
@@ -79,11 +83,10 @@ function rollCardType(rarity) {
   return false;
 }
 
-exports.summonTen = async function () {
+exports.summonTen = async function (nightmare = "Chapter A") {
   let result = [];
-  let event;
-  let rarity;
-  let isEventCard;
+  let event, rarity, isEventCard;
+
   for (let i = 0; i < 10; i++) {
     if (
       i === 9 &&
@@ -95,16 +98,16 @@ exports.summonTen = async function () {
       rarity = rollRarity();
     }
 
-    isEventCard = rollCardType(rarity);
-
     if (rarity == 4) {
       rarity = ["UR+", "UR"];
     } else {
       rarity = [RARITIES[rarity]];
     }
 
+    isEventCard = rollCardType(rarity);
+
     if (isEventCard) {
-      event = "Night Pool Fever";
+      event = nightmare;
     } else {
       event = "Chapter A";
     }

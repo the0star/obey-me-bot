@@ -1,0 +1,113 @@
+DiscordAPIError[10062]: Unknown interaction
+
+    at SequentialHandler.runRequest (/app/node_modules/@discordjs/rest/dist/lib/handlers/SequentialHandler.cjs:293:15)
+
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+
+    at async SequentialHandler.queueRequest (/app/node_modules/@discordjs/rest/dist/lib/handlers/SequentialHandler.cjs:99:14)
+
+    at async REST.request (/app/node_modules/@discordjs/rest/dist/lib/REST.cjs:52:22)
+
+    at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:110:5)
+
+at async Object.execute (
+
+:5)
+
+at async Object.execute (
+
+:7) {
+
+  rawError: { message: 'Unknown interaction', code: 10062 },
+
+  code: 10062,
+
+  status: 404,
+
+  method: 'POST',
+
+  url: 'https://discord.com/api/v10/interactions/1016066260083146842/aW50ZXJhY3Rpb246MTAxNjA2NjI2MDA4MzE0Njg0MjpSMzdMNEJrejhQOE5DTmNJREdFV0NwSFBvNDRSUEJyaVRGSjhaVWM0VkxMUllqZGNaNGRTVHBrcjBrbWJCdHFUNmp6aE1ORnZQWUxUZnBIYjh2TkRsczRadnVmOE9uYW16REE4Z1JFUERUZWRJaGg2MHRzbU8xM1ZacDAyTjEzdA/callback',
+
+  requestBody: { files: [ [Object] ], json: { type: 4, data: [Object] } }
+
+}
+
+node:events:504
+
+      throw er; // Unhandled 'error' event
+
+      ^
+
+DiscordAPIError[10062]: Unknown interaction
+
+    at SequentialHandler.runRequest (/app/node_modules/@discordjs/rest/dist/lib/handlers/SequentialHandler.cjs:293:15)
+
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+
+    at async SequentialHandler.queueRequest (/app/node_modules/@discordjs/rest/dist/lib/handlers/SequentialHandler.cjs:99:14)
+
+    at async REST.request (/app/node_modules/@discordjs/rest/dist/lib/REST.cjs:52:22)
+
+    at async ChatInputCommandInteraction.reply (/app/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:110:5)
+
+at async Object.execute (
+
+:7)
+
+Emitted 'error' event on Client instance at:
+
+    at emitUnhandledRejectionOrErr (node:events:383:10)
+
+    at processTicksAndRejections (node:internal/process/task_queues:85:21) {
+
+  rawError: { message: 'Unknown interaction', code: 10062 },
+
+  code: 10062,
+
+  status: 404,
+
+  method: 'POST',
+
+  url: 'https://discord.com/api/v10/interactions/1016066260083146842/aW50ZXJhY3Rpb246MTAxNjA2NjI2MDA4MzE0Njg0MjpSMzdMNEJrejhQOE5DTmNJREdFV0NwSFBvNDRSUEJyaVRGSjhaVWM0VkxMUllqZGNaNGRTVHBrcjBrbWJCdHFUNmp6aE1ORnZQWUxUZnBIYjh2TkRsczRadnVmOE9uYW16REE4Z1JFUERUZWRJaGg2MHRzbU8xM1ZacDAyTjEzdA/callback',
+
+  requestBody: {
+
+    files: [],
+
+    json: {
+
+      type: 4,
+
+      data: {
+
+        content: 'There was an error while executing this command!',
+
+        tts: false,
+
+        nonce: undefined,
+
+        embeds: undefined,
+
+        components: undefined,
+
+        username: undefined,
+
+        avatar_url: undefined,
+
+        allowed_mentions: undefined,
+
+        flags: 64,
+
+        message_reference: undefined,
+
+        attachments: undefined,
+
+        sticker_ids: undefined
+
+      }
+
+    }
+
+  }
+
+}

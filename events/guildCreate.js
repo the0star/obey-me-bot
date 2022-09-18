@@ -1,6 +1,8 @@
+const db = require("../mongodbInit");
+
 module.exports = {
   name: "guildCreate",
   async execute(guild) {
-    console.log(JSON.stringify(guild));
+    await db.addServer(guild.toJSON());
   },
 };

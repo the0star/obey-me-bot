@@ -7,15 +7,19 @@ const axios = require("axios");
 /**
 
 SEND AS EMBED WITH TITLE LINK TO KARASU OS.COM
-ADD DISCLAIMER: These images are sourced from that website, I'm not responsible for them.
 
 **/
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("summon")
-    .setDescription("Summon x10"),
+    .setDescription("Summon x10 in specified nightmare."),
   async execute(interaction) {
+    // verify input is nightmare
+
+    // send gif
+
+    // send result
     const canvas = createCanvas(1000, 462);
     const context = canvas.getContext("2d");
 
@@ -52,11 +56,9 @@ module.exports = {
       name: "summon.png",
     });
 
-    console.log(attachment);
-
     const exampleEmbed = {
       title: "Title",
-      url: "https://discord.js.org",
+      url: "https://karasu-os.com/event/" + encodeURIComponent(""),
       image: {
         url: "attachment://summon.png",
       },
