@@ -59,7 +59,6 @@ function getRandomInt(min, max) {
 
 function rollRarity() {
   let r = getRandomInt(0, 100);
-  console.log(r);
   if (r < 3) {
     return 4;
   } else if (r < 9 + 3) {

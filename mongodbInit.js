@@ -12,8 +12,6 @@ const cards = client.db("obey_me").collection("cards");
 //   try {
 //     const query = { rarity: "UR" };
 //     const card = await cards.findOne(query);
-
-//     // console.log(card);
 //   } catch (e) {
 //     console.error(e);
 //   }
@@ -21,14 +19,7 @@ const cards = client.db("obey_me").collection("cards");
 
 // run().catch(console.dir);
 
-exports.getNewsChannels = async function (lang = "en") {
-  try {
-    let servers = servers.find({ en_news: 0 });
-    console.log(servers);
-  } catch (e) {
-    console.error(e);
-  }
-};
+// Cards
 
 exports.getRandomCard = async function (source, rarity) {
   try {
@@ -50,7 +41,6 @@ exports.getRandomCard = async function (source, rarity) {
 
 exports.addServer = async function (guild) {
   try {
-    console.log(guild);
     return await servers.insertOne({
       _id: guild.id,
       info: guild,
@@ -74,9 +64,11 @@ exports.addServer = async function (guild) {
   }
 };
 
-exports.updateServerInfo = async function (query, newData) {
+// Servers
+
+exports.updateServerInfo = async function (serverId, newData) {
   try {
-    return await servers.findOneAndUpdate(query, newData);
+    return await servers.findOneAndUpdate({ _id: serverId }, { $set: newData });
   } catch (e) {
     console.error(e);
     return e;
@@ -89,5 +81,40 @@ exports.deleteServer = async function (serverId) {
   } catch (e) {
     console.error(e);
     return e;
+  }
+};
+
+exports.getServerInfo = async function (serverId, returnVal) {
+  try {
+    return await servers.findOne({ _id: serverId }, returnVal);
+  } catch (e) {
+    console.error(e);
+    return e;
+  }
+};
+
+exports.getNewsChannels = async function (lang) {
+  try {
+    let match = {};
+    match["settings.newsChannels." + lang + ".channelId"] = {
+      $ne: "",
+    };
+    const agg = [
+      {
+        $match: match,
+      },
+      {
+        $project: {
+          channelId: "$settings.newsChannels." + lang + ".channelId",
+          message: "$settings.newsChannels." + lang + ".message",
+        },
+      },
+    ];
+    const cursor = servers.aggregate(agg);
+    const result = await cursor.toArray();
+    return result;
+  } catch (e) {
+    console.error(e);
+    return [];
   }
 };

@@ -1,9 +1,10 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const db = require("../mongodbInit");
 
 const data = new SlashCommandBuilder()
   .setName("twitter")
   .setDescription("Setup channels to listen for Obey Me! tweets.")
+  .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
   .addSubcommand((subcommand) =>
     subcommand
       .setName("setup")
@@ -11,11 +12,13 @@ const data = new SlashCommandBuilder()
       .addStringOption((option) =>
         option
           .setName("language")
-          .setDescription("English or Japanese")
+          .setDescription(
+            "English (ObeyMeOfficial1) or Japanese (ObeyMeOfficial)"
+          )
           .setRequired(true)
           .addChoices(
-            { name: "English", value: "english" },
-            { name: "Japanese", value: "japanese" }
+            { name: "English", value: "en" },
+            { name: "Japanese", value: "ja" }
           )
       )
       .addChannelOption((option) =>
@@ -24,7 +27,7 @@ const data = new SlashCommandBuilder()
           .setDescription("Which channel to send updates?")
           .setRequired(true)
       )
-      .addChannelOption((option) =>
+      .addStringOption((option) =>
         option
           .setName("message")
           .setDescription(
@@ -36,35 +39,101 @@ const data = new SlashCommandBuilder()
     subcommand
       .setName("remove")
       .setDescription("Remove a channel from Twitter updates.")
+      .addStringOption((option) =>
+        option
+          .setName("language")
+          .setDescription(
+            "English (ObeyMeOfficial1) or Japanese (ObeyMeOfficial)"
+          )
+          .setRequired(true)
+          .addChoices(
+            { name: "English", value: "en" },
+            { name: "Japanese", value: "ja" }
+          )
+      )
+  )
+  .addSubcommand((subcommand) =>
+    subcommand
+      .setName("check")
+      .setDescription("Check which Twitter updates this server if following.")
   );
 
-async function setupTwitter(type, channel, message) {
+async function setupTwitter(serverId, lang, channel, message) {
   try {
-    if (message.length > 256) throw "Message too long!";
-    
+    if (message.length > 256) throw "Message exceeded 256 characters limit.";
+
+    let dict = {};
+    dict["settings.newsChannels." + lang] = {
+      channelId: channel,
+      message: message,
+    };
+
+    await db.updateServerInfo(serverId, dict);
+
     return;
   } catch (e) {
+    console.error(e);
     return;
   }
 }
 
-async function removeTwitter(type) {
+async function removeTwitter(serverId, lang) {
+  let dict = {};
+  dict["settings.newsChannels." + lang] = {
+    channelId: "",
+    message: "",
+  };
+  await db.updateServerInfo(serverId, dict);
   return;
+}
+
+async function checkTwitter(serverId) {
+  return (await db.getServerInfo(serverId, { "settings.newsChannels": 1 }))
+    .settings.newsChannels;
 }
 
 module.exports = {
   data: data,
   async execute(interaction) {
     try {
-      let command = interaction.options.getSubCommand();
+      if (!interaction.isChatInputCommand()) return;
+
+      await interaction.reply("Working on it...");
+
+      let command = interaction.options.getSubcommand();
+      let lang = interaction.options.getString("language");
+      let serverId = interaction.guildId;
+
       if (command === "setup") {
-        await setupTwitter();
+        let channelId = interaction.options.getChannel("channel").id;
+        let message = interaction.options.getString("message") || "";
+
+        await setupTwitter(serverId, lang, channelId, message);
+        await interaction.editReply(
+          `You have added ${
+            lang === "en" ? "English" : "Japanese"
+          } Twitter updates to this server.`
+        );
       } else if (command === "remove") {
-        await removeTwitter();
+        await removeTwitter(serverId, lang);
+        await interaction.editReply(
+          `You have removed ${
+            lang === "en" ? "English" : "Japanese"
+          } Twitter updates from this server.`
+        );
+      } else if (command === "check") {
+        let channels = await checkTwitter(serverId);
+        let enStatus = channels.en.channelId
+          ? `Sending updates to <#${channels.en.channelId}>`
+          : "n/a";
+        let jaStatus = channels.ja.channelId
+          ? `Sending updates to <#${channels.ja.channelId}>`
+          : "n/a";
+
+        await interaction.editReply(
+          `English (ObeyMeOfficial1): ${enStatus}\nJapanese (ObeyMeOfficial): ${jaStatus}`
+        );
       }
-      await interaction.reply("Pong!");
-      // var: 1) english or japanese, 2) channels,
-      // optional: 3) message to go with the tweet
     } catch (e) {
       throw e;
     }

@@ -3,6 +3,7 @@ const path = require("node:path");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
 // const { clientId, guildId, token } = require("./config.json");
+const token = process.env.TOKEN;
 
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");
@@ -16,7 +17,7 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+const rest = new REST({ version: "10" }).setToken(token);
 
 (async () => {
   try {

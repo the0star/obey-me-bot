@@ -1,12 +1,12 @@
 {
   "info": {},
   "settings": {
-    "channels": {
-      "jaNews": {
+    "newsChannels": {
+      "ja": {
         "channelId": "channelId",
         "message": "Message before the link, discord syntax allowed"
       },
-      "enNews": {
+      "en": {
         "channelId": "channelId",
         "message": "Message before the link, discord syntax allowed"
       },

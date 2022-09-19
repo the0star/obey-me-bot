@@ -1,32 +1,8 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
-// const { token } = require("./config.json");
-
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-/* #region Functions */
-exports.sendMsg = function (channelId, msg) {
-  const channel = client.channels.cache.get(channelId);
-  channel.send(msg);
-};
-
-// exports.getInvites = function (guildId) {
-//   const guild = client.guilds.cache.get(guildId);
-//   guild.invites.fetch().then(console.log).catch(console.error);
-// };
-
-exports.setServerDiscovery = function (guildId, channelId, val) {
-  const guild = client.guilds.cache.get(guildId);
-  guild.setWidgetSettings(
-    {
-      enabled: val,
-      channel_id: channelId,
-    },
-    "Set server discovery to " + val
-  );
-};
-/* #endregion */
+const db = require("./mongodbInit");
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
@@ -56,3 +32,28 @@ for (const file of eventFiles) {
 }
 
 client.login(process.env.TOKEN);
+
+/* #region Functions */
+exports.sendTwitterUpdates = async function (lang, link) {
+  try {
+    let channels = await db.getNewsChannels(lang);
+    channels.forEach(async (i) => {
+      const channel = client.channels.cache.get(i.channelId);
+      channel.send(i.message + "\n" + link);
+    });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+exports.setServerDiscovery = function (guildId, channelId, val) {
+  const guild = client.guilds.cache.get(guildId);
+  guild.setWidgetSettings(
+    {
+      enabled: val,
+      channel_id: channelId,
+    },
+    "Set server discovery to " + val
+  );
+};
+/* #endregion */

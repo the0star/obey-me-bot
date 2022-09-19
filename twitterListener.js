@@ -27,7 +27,6 @@ async function getAllRules() {
   });
 
   if (response.statusCode !== 200) {
-    console.log("Error:", response.statusMessage, response.statusCode);
     throw new Error(response.body);
   }
 
@@ -75,7 +74,6 @@ async function setRules() {
   });
 
   if (response.statusCode !== 201) {
-    console.log(response.body);
     throw new Error(response.body);
   }
 
@@ -92,16 +90,18 @@ function streamConnect(retryAttempt) {
   });
 
   stream
-    .on("data", (data) => {
+    .on("data", async (data) => {
       try {
         const json = JSON.parse(data);
 
         console.log(JSON.stringify(json));
         
+        // TODO: Use Twitter rule matching instead of hard-coding.
+        // Send discord messages.
         const tweetId = json.data.id;
         const username = json.includes.users.find(x => x.id == json.data.author_id).username;
-        
-        // await discordController.sendTwitterUpdates(`https://twitter.com/${username}/status/${tweetId}`);
+        const lang = username == "ObeyMeOfficial1" ? "en" : "ja";
+        await discordController.sendTwitterUpdates(lang, `https://twitter.com/${username}/status/${tweetId}`);
 
         // A successful connection resets retry count.
         retryAttempt = 0;
