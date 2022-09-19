@@ -7,6 +7,7 @@ const client = new MongoClient(process.env.URI, {
 
 const servers = client.db("obeyme_bot").collection("servers");
 const cards = client.db("obey_me").collection("cards");
+const events = client.db("obey_me").collection("events");
 
 // async function run() {
 //   try {
@@ -20,6 +21,10 @@ const cards = client.db("obey_me").collection("cards");
 // run().catch(console.dir);
 
 // Cards
+
+exports.findEvent = async function (query) {
+  return await events.find(query).toArray();
+};
 
 exports.getRandomCard = async function (source, rarity) {
   try {

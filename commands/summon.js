@@ -6,16 +6,47 @@ const axios = require("axios");
 
 /**
 
-SEND AS EMBED WITH TITLE LINK TO KARASU OS.COM
+TODO: 
+- add "new" or "cheat card" icon to cards
 
 **/
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("summon")
-    .setDescription("Summon x10 in specified nightmare."),
+    .setDescription("Summon x10 in specified nightmare.")
+    .addStringOption((option) =>
+      option
+        .setName("name")
+        .setDescription(
+          "Nightmare name. List of available nightmares on karasu-os.com/events."
+        )
+        .setRequired(true)
+    ),
   async execute(interaction) {
-    // verify input is nightmare
+    if (!interaction.isChatInputCommand()) return;
+    let name =
+      interaction.options.getString("name") || "Swift Blades & Deadly Ninjutsu";
+    let attachment, embed;
+
+    await interaction.reply({
+      embeds: [
+        {
+          title: "Loading...",
+        },
+      ],
+    });
+
+    if (!(await summon.isNightmare(name))) {
+      await interaction.editReply({
+        embeds: [
+          {
+            title: "Nightmare not found!",
+          },
+        ],
+      });
+      return;
+    }
 
     // send gif
 
@@ -34,7 +65,7 @@ module.exports = {
 
     let top = 129;
     let left = 219;
-    let cards = await summon.summonTen();
+    let cards = await summon.summonTen(name);
     for (let i = 0; i < 10; i++) {
       let body = await axios.get(
         "https://karasu-os.com/images/cards/S/" + cards[i] + ".jpg",
@@ -52,18 +83,21 @@ module.exports = {
       }
     }
 
-    const attachment = new AttachmentBuilder(canvas.toBuffer("image/png"), {
+    attachment = new AttachmentBuilder(canvas.toBuffer("image/png"), {
       name: "summon.png",
     });
 
-    const exampleEmbed = {
-      title: "Title",
-      url: "https://karasu-os.com/event/" + encodeURIComponent(""),
+    embed = {
+      title: name,
+      url: "https://karasu-os.com/event/" + encodeURIComponent(name),
       image: {
         url: "attachment://summon.png",
       },
     };
 
-    await interaction.reply({ embeds: [exampleEmbed], files: [attachment] });
+    await interaction.editReply({
+      embeds: [embed],
+      files: [attachment],
+    });
   },
 };

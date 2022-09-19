@@ -38,6 +38,7 @@ const RARITIES = ["N", "R", "SR", "SSR", "UR", "UR+"];
 async function roll(source, rarity) {
   try {
     let card = (await database.getRandomCard(source, rarity))[0];
+    if (!card) card = (await database.getRandomCard("Chapter A", rarity))[0];
     return {
       name: card.uniqueName,
       rarity: card.rarity,
@@ -46,8 +47,8 @@ async function roll(source, rarity) {
     console.error("Error:", e);
     return {
       name: "Little_D._of_Pride_(Pride)",
-      rarity: "N"
-    }
+      rarity: "N",
+    };
   }
 }
 
@@ -82,7 +83,7 @@ function rollCardType(rarity) {
   return false;
 }
 
-exports.summonTen = async function (nightmare = "Chapter A") {
+exports.summonTen = async function (nightmare) {
   let result = [];
   let event, rarity, isEventCard;
 
@@ -97,12 +98,6 @@ exports.summonTen = async function (nightmare = "Chapter A") {
       rarity = rollRarity();
     }
 
-    if (rarity == 4) {
-      rarity = ["UR+", "UR"];
-    } else {
-      rarity = [RARITIES[rarity]];
-    }
-
     isEventCard = rollCardType(rarity);
 
     if (isEventCard) {
@@ -111,8 +106,29 @@ exports.summonTen = async function (nightmare = "Chapter A") {
       event = "Chapter A";
     }
 
+    if (rarity == 4) {
+      rarity = ["UR+", "UR"];
+    } else {
+      rarity = [RARITIES[rarity]];
+    }
+
     result.push(await roll(event, rarity));
   }
 
+  console.log("\n\n");
+
   return result.map((x) => x.name);
+};
+
+exports.isNightmare = async function (name) {
+  try {
+    let result = await database.findEvent({
+      type: "Nightmare",
+      "name.en": name,
+    });
+    return result.length > 0;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
 };
