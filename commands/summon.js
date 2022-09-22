@@ -19,14 +19,13 @@ module.exports = {
       option
         .setName("name")
         .setDescription(
-          "Nightmare name. List of available nightmares on karasu-os.com/events."
+          'Nightmare name. Accepts full names such as "Share Your Warmth", or short names such as "Warmth".'
         )
         .setRequired(true)
     ),
   async execute(interaction) {
     if (!interaction.isChatInputCommand()) return;
-    let name =
-      interaction.options.getString("name") || "Swift Blades & Deadly Ninjutsu";
+    let name = interaction.options.getString("name");
     let attachment, embed;
 
     await interaction.reply({
