@@ -4,7 +4,7 @@ const client = new MongoClient(process.env.URI, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
-
+const db = client.db("obeyme_bot");
 const servers = client.db("obeyme_bot").collection("servers");
 const cards = client.db("obey_me").collection("cards");
 const events = client.db("obey_me").collection("events");
@@ -23,6 +23,7 @@ const events = client.db("obey_me").collection("events");
 // Cards
 
 exports.findNightmare = async function (name) {
+  // find from short names
   let regex = "^" + name + "$";
   let nightmare = await db.collection("nightmares").findOne({
     $or: [
