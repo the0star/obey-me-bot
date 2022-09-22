@@ -55,7 +55,7 @@ module.exports = {
     const context = canvas.getContext("2d");
 
     const background = await axios.get(
-      "https://cdn.glitch.global/38f0eb85-535c-45fe-b659-c7f2aaaf859b/image.png?v=1662235426528",
+      "https://cdn.glitch.global/38f0eb85-535c-45fe-b659-c7f2aaaf859b/image.png?v=1663826006976",
       { responseType: "arraybuffer" }
     );
     const backgroundImage = new Image();
