@@ -6,7 +6,7 @@ const axios = require("axios");
 
 /**
 
-TODO: 
+TODO:
 - add "new" or "cheat card" icon to cards
 
 **/
@@ -37,7 +37,9 @@ module.exports = {
       ],
     });
 
-    if (!(await summon.isNightmare(name))) {
+    // verify name
+    name = await summon.isNightmare(name);
+    if (!name) {
       await interaction.editReply({
         embeds: [
           {
@@ -47,8 +49,6 @@ module.exports = {
       });
       return;
     }
-
-    // send gif
 
     // send result
     const canvas = createCanvas(1000, 462);

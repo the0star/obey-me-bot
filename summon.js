@@ -115,18 +115,13 @@ exports.summonTen = async function (nightmare) {
     result.push(await roll(event, rarity));
   }
 
-  console.log("\n\n");
-
   return result.map((x) => x.name);
 };
 
 exports.isNightmare = async function (name) {
   try {
-    let result = await database.findEvent({
-      type: "Nightmare",
-      "name.en": name,
-    });
-    return result.length > 0;
+    let result = await database.findNightmare(name);
+    return result?.name;
   } catch (e) {
     console.error(e);
     return false;

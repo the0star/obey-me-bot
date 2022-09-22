@@ -22,8 +22,15 @@ const events = client.db("obey_me").collection("events");
 
 // Cards
 
-exports.findEvent = async function (query) {
-  return await events.find(query).toArray();
+exports.findNightmare = async function (name) {
+  let regex = "^" + name + "$";
+  let nightmare = await db.collection("nightmares").findOne({
+    $or: [
+      { short: { $regex: regex, $options: "i" } },
+      { name: { $regex: regex, $options: "i" } },
+    ],
+  });
+  return nightmare;
 };
 
 exports.getRandomCard = async function (source, rarity) {
