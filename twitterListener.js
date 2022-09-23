@@ -12,10 +12,10 @@ const streamURL =
 
 const rules = [
   {
-    value: "from:ObeyMeOfficial -is:reply",  // -is:retweet 
+    value: "from:ObeyMeOfficial -is:reply -is:nullcast", // -is:retweet
   },
   {
-    value: "from:ObeyMeOfficial1 -is:reply",  // -is:retweet 
+    value: "from:ObeyMeOfficial1 -is:reply -is:nullcast", // -is:retweet
   },
 ];
 
@@ -33,6 +33,7 @@ async function getAllRules() {
   return response.body;
 }
 
+/*
 async function deleteAllRules(rules) {
   if (!Array.isArray(rules.data)) {
     return null;
@@ -79,6 +80,7 @@ async function setRules() {
 
   return response.body;
 }
+*/
 
 function streamConnect(retryAttempt) {
   const stream = needle.get(streamURL, {
@@ -94,14 +96,17 @@ function streamConnect(retryAttempt) {
       try {
         const json = JSON.parse(data);
 
-        console.log(JSON.stringify(json));
-        
         // TODO: Use Twitter rule matching instead of hard-coding.
         // Send discord messages.
         const tweetId = json.data.id;
-        const username = json.includes.users.find(x => x.id == json.data.author_id).username;
+        const username = json.includes.users.find(
+          (x) => x.id == json.data.author_id
+        ).username;
         const lang = username == "ObeyMeOfficial1" ? "en" : "ja";
-        await discordController.sendTwitterUpdates(lang, `https://twitter.com/${username}/status/${tweetId}`);
+        await discordController.sendTwitterUpdates(
+          lang,
+          `https://twitter.com/${username}/status/${tweetId}`
+        );
 
         // A successful connection resets retry count.
         retryAttempt = 0;
@@ -143,15 +148,15 @@ function streamConnect(retryAttempt) {
     currentRules = await getAllRules();
 
     // Delete all rules. Comment the line below if you want to keep your existing rules.
-    await deleteAllRules(currentRules);
+    // await deleteAllRules(currentRules);
 
     // Add rules to the stream. Comment the line below if you don't want to add new rules.
-    await setRules();
+    // await setRules();
   } catch (e) {
     console.error(e);
     process.exit(1);
   }
-  
+
   // Listen to the stream.
   streamConnect(0);
 })();
