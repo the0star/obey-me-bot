@@ -9,18 +9,16 @@ const servers = client.db("obeyme_bot").collection("servers");
 const cards = client.db("obey_me").collection("cards");
 const events = client.db("obey_me").collection("events");
 
-// async function run() {
-//   try {
-//     const query = { rarity: "UR" };
-//     const card = await cards.findOne(query);
-//   } catch (e) {
-//     console.error(e);
-//   }
-// }
-
-// run().catch(console.dir);
-
 // Cards
+
+exports.getNightmares = async function (name) {
+  let nightmares = await db
+    .collection("nightmares")
+    .find()
+    .sort({ name: 1 })
+    .toArray();
+  return nightmares;
+};
 
 exports.findNightmare = async function (name) {
   // find from short names
@@ -52,6 +50,8 @@ exports.getRandomCard = async function (source, rarity) {
   }
 };
 
+// Servers
+
 exports.addServer = async function (guild) {
   try {
     return await servers.insertOne({
@@ -76,8 +76,6 @@ exports.addServer = async function (guild) {
     return e;
   }
 };
-
-// Servers
 
 exports.updateServerInfo = async function (serverId, newData) {
   try {
