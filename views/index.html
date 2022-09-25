@@ -147,7 +147,9 @@
             </form>
           </div>
           <div class="col-md-10">
-            <p>Total summons: {{count.total * 10}}</p>
+            <p style="margin-top: 1rem; font-size: large">
+              Total summons: {{count.total * 10}}
+            </p>
             <table class="table">
               <thead>
                 <tr>
@@ -177,7 +179,11 @@
           </div>
           <div class="col-md-10">
             <h5 :class="{ 'd-none': !isLoading }">Loading...</h5>
-            <img class="img-fluid" :src="summonResult.img" />
+            <img
+              class="img-fluid"
+              :class="{ 'd-none': isLoading }"
+              :src="summonResult.img"
+            />
           </div>
         </div>
       </div>
