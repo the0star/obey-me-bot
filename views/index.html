@@ -131,8 +131,8 @@
                 <select class="form-select" v-model="selected">
                   <option value="" disabled selected>Choose a nightmare</option>
                   <option
-                    v-for="{ name, short } in summonResult.nightmares"
-                    :value="short || name"
+                    v-for="{ name } in summonResult.nightmares"
+                    :value="name"
                   >
                     {{ name }}
                   </option>
@@ -153,35 +153,42 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col"></th>
+                  <th scope="col">Rarity</th>
                   <th scope="col">Count</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">UR/UR+</th>
+                  <td>UR/UR+</td>
                   <td>{{count.UR}}</td>
                 </tr>
                 <tr>
-                  <th scope="row">SSR</th>
+                  <td>SSR</td>
                   <td>{{count.SSR}}</td>
                 </tr>
                 <tr>
-                  <th scope="row">SR</th>
+                  <td>SR</td>
                   <td>{{count.SR}}</td>
                 </tr>
                 <tr>
-                  <th scope="row">R</th>
+                  <td>R</td>
                   <td>{{count.R}}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="col-md-10">
-            <h5 :class="{ 'd-none': !isLoading }">Loading...</h5>
+            <p>
+              <a
+                v-if="selected"
+                :href="'https://karasu-os.com/event/' + encodeURIComponent(this.selected)"
+                >Go to <mark>{{selected}}</mark>'s page.</a
+              >
+            </p>
+            <h5 v-show="isLoading">Loading...</h5>
             <img
+              v-show="!isLoading"
               class="img-fluid"
-              :class="{ 'd-none': isLoading }"
               :src="summonResult.img"
             />
           </div>
