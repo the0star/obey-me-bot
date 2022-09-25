@@ -76,7 +76,6 @@
         },
         methods: {
           countData() {
-            console.log(this.summonResult.result);
             this.count.total++;
             this.summonResult.result.forEach((card) => {
               if (card.rarity === "UR+" || card.rarity === "UR") {
