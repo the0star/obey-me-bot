@@ -65,7 +65,7 @@
             SR: 0,
             R: 0,
           },
-          isDisabled: false,
+          isLoading: false,
         }),
         created() {
           // fetch on init
@@ -94,12 +94,12 @@
           async onSubmit() {
             if (!this.selected) return;
 
-            this.isDisabled = true;
+            this.isLoading = true;
 
             await this.fetchData();
             this.countData();
 
-            this.isDisabled = false;
+            this.isLoading = false;
           },
         },
       }).mount("#app");
@@ -108,6 +108,23 @@
       <h1>Obey Me Gacha Simulator</h1>
       <div id="app">
         <div class="row justify-content-center">
+          <div class="col-md-10 my-3">
+            <p>
+              List of available nightmares and their short names
+              <a href="/names">here</a>.
+            </p>
+            <p>
+              Obey Me Info is a discord bot who send Obey Me Official Twitter
+              news for free, does gacha simulator from discord, and (coming
+              soon!) have a ranking system of most liked Obey Me cards (vote for
+              your most liked card from discord, everyone can have one daily
+              vote). Invite Obey Me Info to your server
+              <a
+                href="https://discord.com/api/oauth2/authorize?client_id=1009238674237554738&permissions=2147601408&scope=bot"
+                >here</a
+              >.
+            </p>
+          </div>
           <div class="col-md-10">
             <form @submit.prevent="onSubmit">
               <div class="input-group">
@@ -122,7 +139,7 @@
                 </select>
                 <input
                   class="btn btn-outline-primary"
-                  :class="{ disabled: isDisabled }"
+                  :class="{ disabled: isLoading }"
                   type="submit"
                   value="Summon x10"
                 />
@@ -159,7 +176,8 @@
             </table>
           </div>
           <div class="col-md-10">
-            <img :src="summonResult.img" />
+            <h5 :class="{ 'd-none': !isLoading }">Loading...</h5>
+            <img class="img-fluid" :src="summonResult.img" />
           </div>
         </div>
       </div>
