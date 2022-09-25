@@ -1,4 +1,6 @@
 const database = require("./mongodbInit");
+const { createCanvas, Image } = require("@napi-rs/canvas");
+const axios = require("axios");
 
 // Of all cards in pool, there is a __ % of drawing that specific card.
 // goal: return 10 doc
@@ -114,8 +116,8 @@ exports.summonTen = async function (nightmare) {
 
     result.push(await roll(event, rarity));
   }
-
-  return result.map((x) => x.name);
+  let image = await getImage(result.map((x) => x.name));
+  return { result: result, image: image };
 };
 
 exports.isNightmare = async function (name) {
@@ -127,3 +129,39 @@ exports.isNightmare = async function (name) {
     return false;
   }
 };
+
+async function getImage(cards) {
+  const canvas = createCanvas(1000, 462);
+  const context = canvas.getContext("2d");
+
+  const background = await axios.get(
+    "https://cdn.glitch.global/38f0eb85-535c-45fe-b659-c7f2aaaf859b/image.png?v=1662235426528",
+    { responseType: "arraybuffer" }
+  );
+  const backgroundImage = new Image();
+  backgroundImage.src = Buffer.from(background.data, "utf-8");
+
+  context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
+  let top = 129;
+  let left = 219;
+
+  for (let i = 0; i < 10; i++) {
+    let body = await axios.get(
+      "https://karasu-os.com/images/cards/S/" + cards[i] + ".jpg",
+      { responseType: "arraybuffer" }
+    );
+    let avatar = new Image();
+    avatar.src = Buffer.from(body.data, "utf-8");
+    context.drawImage(avatar, left, top, 93, 93);
+
+    if (i % 2 === 0) {
+      top += 24 + 93;
+    } else {
+      top -= 24 + 93;
+      left += 24 + 93;
+    }
+  }
+
+  return canvas.toBuffer("image/png");
+}

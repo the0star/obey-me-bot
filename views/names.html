@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>Obey Me Nightmare List | Obey Me Info</title>
+    <!--
+    <meta
+      name="description"
+      content="A page of discord servers for the game Obey Me."
+    />
+    -->
+    <meta name="author" content="Obey Me Info" />
+
+    <meta property="og:title" content="Obey Me Nightmare List | Obey Me Info" />
+    <meta property="og:type" content="website" />
+    <!--
+    <meta
+      property="og:url"
+      content="https://www.sitepoint.com/a-basic-html5-template/"
+    />
+    <meta
+      property="og:description"
+      content=""
+    />
+    <meta property="og:image" content="image.png" />
+    -->
+
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  </head>
+
+  <body>
+    <script type="module">
+      const { createApp } = Vue;
+      const API_URL = "/getNightmares";
+
+      createApp({
+        data: () => ({
+          nightmares: [],
+        }),
+        created() {
+          // fetch on init
+          this.fetchData();
+        },
+        methods: {
+          async fetchData() {
+            const url = API_URL;
+            this.nightmares = await (await fetch(url)).json();
+          },
+        },
+      }).mount("#app");
+    </script>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div id="app">
+            <h1>Obey Me Nightmares</h1>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Short name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="{ name, short } in nightmares">
+                  <td>{{ name }}</td>
+                  <td>{{ short }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

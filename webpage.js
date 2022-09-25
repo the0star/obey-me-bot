@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 
 const dbController = require("./mongodbInit");
+const gachaController = require("./summon");
 
 app.use(express.static("public"));
 
@@ -11,9 +12,33 @@ app.get("/getNightmares", async (request, response) => {
   response.json(result);
 });
 
+app.get("/summon", async (request, response) => {
+  let name = "";
+  let result = [];
+  let img = "";
+  let nightmares = await dbController.getNightmares();
+  if (request.query.name && request.query.name !== "undefined") {
+    name = request.query.name;
+    result = await gachaController.summonTen(request.query.name);
+    img =
+      "data:image/png;base64," + Buffer.from(result.image).toString("base64");
+  }
+  response.json({
+    name: name,
+    result: result.result,
+    img: img,
+    nightmares: nightmares,
+  });
+});
+
+//
+
 app.get("/invites", (request, response) => {
-  // response.sendStatus(200);
   response.sendFile(__dirname + "/views/invites.html");
+});
+
+app.get("/names", (request, response) => {
+  response.sendFile(__dirname + "/views/names.html");
 });
 
 app.get("/", (request, response) => {
