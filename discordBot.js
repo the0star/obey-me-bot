@@ -39,11 +39,20 @@ exports.sendTwitterUpdates = async function (lang, link) {
     let channels = await db.getNewsChannels(lang);
     channels.forEach(async (i) => {
       const channel = client.channels.cache.get(i.channelId);
-      await channel.send(i.message + "\n" + link);
+      channel.send(i.message + "\n" + link).catch((e) => {
+        console.error("Error:", i.channelId, e.message);
+      });
     });
   } catch (e) {
     console.error(e);
   }
+};
+
+exports.sendMessage = async function (channelId, message) {
+  const channel = client.channels.cache.get(channelId);
+  channel.send(message).catch((e) => {
+    console.error(e);
+  });
 };
 
 exports.setServerDiscovery = function (guildId, channelId, val) {
