@@ -39,7 +39,7 @@ exports.sendTwitterUpdates = async function (lang, link) {
     let channels = await db.getNewsChannels(lang);
     channels.forEach(async (i) => {
       const channel = client.channels.cache.get(i.channelId);
-      channel.send(i.message + "\n" + link);
+      await channel.send(i.message + "\n" + link);
     });
   } catch (e) {
     console.error(e);
