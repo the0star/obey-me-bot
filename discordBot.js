@@ -36,12 +36,22 @@ client.login(process.env.TOKEN);
 /* #region Functions */
 exports.sendTwitterUpdates = async function (lang, link) {
   try {
-    let channels = await db.getNewsChannels(lang);
-    channels.forEach(async (i) => {
-      const channel = client.channels.cache.get(i.channelId);
-      channel.send(i.message + "\n" + link).catch((e) => {
-        console.error("Error:", i.channelId, e.message);
-      });
+    const channels = await db.getNewsChannels(lang);
+    channels.forEach(async (i, j) => {
+      let channel = client.channels.cache.get(i.channelId);
+      channel
+        .send(i.message + "\n" + link)
+        .then(() => {
+          let msg = `Sent ${j}/${channels.length} to ${i}.`;
+          exports.sendMessage("1022190209179328655", msg);
+        })
+        .catch((e) => {
+          exports.sendMessage(
+            "1022190209179328655",
+            "Failed to send update to " + i.channelId
+          );
+          console.error("Error:", i.channelId, e.message);
+        });
     });
   } catch (e) {
     console.error(e);
@@ -49,10 +59,35 @@ exports.sendTwitterUpdates = async function (lang, link) {
 };
 
 exports.sendMessage = async function (channelId, message) {
-  const channel = client.channels.cache.get(channelId);
-  channel.send(message).catch((e) => {
-    console.error(e);
-  });
+  try {
+    const channel = client.channels.cache.get(channelId);
+    await channel.send(message);
+    // .catch((e) => {
+    //   console.error(e);
+    // });
+
+    // [
+    //   "1022190209179328655",  // has message perm
+    //   "1023815479304921119",  // does not have message perm
+    //   "1022190209179328655",
+    //   "1023815479304921119",
+    //   "1022190209179328655",
+    // ].forEach(async (i, j) => {
+    //   let channel = client.channels.cache.get(i);
+    //   channel
+    //     .send(message)
+    //     .then(() => {
+    //       console.log(i, j);
+    //     })
+    //     .catch((e) => {
+    //       console.error("Error T^T");
+    //     });
+    // });
+
+    // console.log(result.toJSON());
+  } catch (e) {
+    console.error("ERROR:", e);
+  }
 };
 
 exports.setServerDiscovery = function (guildId, channelId, val) {
