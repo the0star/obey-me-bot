@@ -42,13 +42,15 @@ exports.sendTwitterUpdates = async function (lang, link) {
       channel
         .send(i.message + "\n" + link)
         .then(() => {
-          let msg = `Sent ${j}/${channels.length} to ${i}.`;
-          exports.sendMessage("1022190209179328655", msg);
+          exports.sendMessage(
+            "1022190209179328655",
+            `${lang}: Sent ${j + 1}/${channels.length} to ${i.channelId}.`
+          );
         })
         .catch((e) => {
           exports.sendMessage(
             "1022190209179328655",
-            "Failed to send update to " + i.channelId
+            `Failed to send \`${lang}\` update to channel ${i.channelId}.`
           );
           console.error("Error:", i.channelId, e.message);
         });
