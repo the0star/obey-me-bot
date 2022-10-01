@@ -103,7 +103,7 @@ function streamConnect(retryAttempt) {
           (x) => x.id == json.data.author_id
         ).username;
         const lang = username == "ObeyMeOfficial1" ? "en" : "ja";
-        await discordController.sendTwitterUpdates(
+        discordController.sendTwitterUpdates(
           lang,
           `https://twitter.com/${username}/status/${tweetId}`
         );
