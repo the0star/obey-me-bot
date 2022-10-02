@@ -90,14 +90,16 @@ exports.summonTen = async function (nightmare) {
   let event, rarity, isEventCard;
 
   for (let i = 0; i < 10; i++) {
+    rarity = rollRarity();
+
+    // 保底
     if (
       i === 9 &&
       !result.find((x) => ["UR+", "UR", "SSR"].includes(x.rarity))
     ) {
-      // fix: always give ssr if unlucky
-      rarity = 3;
-    } else {
-      rarity = rollRarity();
+      while (rarity < 3) {
+        rarity = rollRarity();
+      }
     }
 
     isEventCard = rollCardType(rarity);
