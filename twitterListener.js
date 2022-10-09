@@ -116,7 +116,10 @@ function streamConnect(retryAttempt) {
           "This stream is currently at the maximum allowed connection limit."
         ) {
           console.log(data.detail);
-          process.exit(1);
+          discordController.sendMessage("1022190209179328655", data.detail);
+
+          // process.exit(1);
+          return;
         } else {
           // Keep alive signal received. Do nothing.
         }
@@ -125,7 +128,10 @@ function streamConnect(retryAttempt) {
     .on("err", (error) => {
       if (error.code !== "ECONNRESET") {
         console.log(error.code);
-        process.exit(1);
+        discordController.sendMessage("1022190209179328655", error.code);
+
+        // process.exit(1);
+        return;
       } else {
         // This reconnection logic will attempt to reconnect when a disconnection is detected.
         // To avoid rate limits, this logic implements exponential backoff, so the wait time
@@ -154,7 +160,10 @@ function streamConnect(retryAttempt) {
     // await setRules();
   } catch (e) {
     console.error(e);
-    process.exit(1);
+    // process.exit(1);
+
+    discordController.sendMessage("1022190209179328655", e.message);
+    return;
   }
 
   // Listen to the stream.

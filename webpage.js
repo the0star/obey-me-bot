@@ -8,27 +8,37 @@ const gachaController = require("./summon");
 app.use(express.static("public"));
 
 app.get("/getNightmares", async (request, response) => {
-  let result = await dbController.getNightmares();
-  response.json(result);
+  try {
+    let result = await dbController.getNightmares();
+    response.json(result);
+  } catch (e) {
+    console.error(e);
+    response.json({});
+  }
 });
 
 app.get("/summon", async (request, response) => {
-  let name = "";
-  let result = [];
-  let img = "";
-  let nightmares = await dbController.getNightmares();
-  if (request.query.name && request.query.name !== "undefined") {
-    name = request.query.name;
-    result = await gachaController.summonTen(request.query.name);
-    img =
-      "data:image/png;base64," + Buffer.from(result.image).toString("base64");
+  try {
+    let name = "";
+    let result = [];
+    let img = "";
+    let nightmares = await dbController.getNightmares();
+    if (request.query.name && request.query.name !== "undefined") {
+      name = request.query.name;
+      result = await gachaController.summonTen(request.query.name);
+      img =
+        "data:image/png;base64," + Buffer.from(result.image).toString("base64");
+    }
+    response.json({
+      name: name,
+      result: result.result,
+      img: img,
+      nightmares: nightmares,
+    });
+  } catch (e) {
+    console.error(e);
+    response.json({});
   }
-  response.json({
-    name: name,
-    result: result.result,
-    img: img,
-    nightmares: nightmares,
-  });
 });
 
 //
