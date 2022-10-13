@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const summon = require("../summon.js");
+const mongoDB = require("../mongodbInit");
 
 /**
 
@@ -48,6 +49,8 @@ module.exports = {
 
     // send result
     let result = await summon.summonTen(name);
+
+    await mongoDB.saveResults(interaction.user.id, result.result);
 
     attachment = new AttachmentBuilder(result.image, {
       name: "summon.png",

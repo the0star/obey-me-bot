@@ -6,6 +6,7 @@ const client = new MongoClient(process.env.URI, {
 });
 const db = client.db("obeyme_bot");
 const servers = client.db("obeyme_bot").collection("servers");
+const summons = client.db("obeyme_bot").collection("summonResults");
 const cards = client.db("obey_me").collection("cards");
 const events = client.db("obey_me").collection("events");
 
@@ -129,3 +130,40 @@ exports.getNewsChannels = async function (lang) {
     return [];
   }
 };
+
+exports.saveResults = async function (uid, results) {
+  try {
+    let docs = [];
+    results.forEach((x) => {
+      docs.push({ user: uid, name: x.name, date: new Date() });
+    });
+
+    await summons.insertMany(docs);
+    // await limitSummonResults(uid);
+
+    return;
+  } catch (e) {
+    console.error(e);
+    return;
+  }
+};
+
+async function limitSummonResults(uid) {
+  try {
+    let total = await summons.countDocuments({ user: uid });
+    if (total > 100) {
+      let extraCount = total - 100;
+      let allSummons = await summons
+        .find({ user: uid })
+        .sort({ date: 1 })
+        .limit(extraCount);
+      allSummons.forEach(async (x) => {
+        await summons.deleteOne({ _id: x._id });
+      });
+    }
+    return;
+  } catch (e) {
+    console.error(e);
+    return;
+  }
+}
