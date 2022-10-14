@@ -335,7 +335,7 @@ async function getGlobalLuck(uid) {
     let globalLuck = await summons.aggregate(globalLuckPipeline).toArray();
     globalLuck = globalLuck.map((x) => x._id);
 
-    return Math.round(globalLuck.indexOf(userLuck) / globalLuck.length) * 100;
+    return (globalLuck.indexOf(userLuck) / globalLuck.length * 100).toFixed(2);
   } catch (e) {
     return 0;
   }
