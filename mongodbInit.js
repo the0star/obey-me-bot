@@ -135,7 +135,12 @@ exports.saveResults = async function (uid, results) {
   try {
     let docs = [];
     results.forEach((x) => {
-      docs.push({ user: uid, name: x.name, date: new Date() });
+      docs.push({
+        user: uid,
+        name: x.name,
+        rarity: x.rarity,
+        date: new Date(),
+      });
     });
 
     await summons.insertMany(docs);
@@ -147,6 +152,194 @@ exports.saveResults = async function (uid, results) {
     return;
   }
 };
+
+exports.getUserLuck = async function (uid, type) {
+  try {
+    if (type === "global") {
+      return await getGlobalLuck(uid);
+    } else {
+      return 0;
+    }
+  } catch (e) {
+    return 0;
+  }
+};
+
+async function getGlobalLuck(uid) {
+  try {
+    let userLuckPipeline = [
+      {
+        $group: {
+          _id: "$user",
+          results: {
+            $push: "$$ROOT",
+          },
+        },
+      },
+      {
+        $project: {
+          total: {
+            $size: "$results",
+          },
+          "UR+": {
+            $filter: {
+              input: "$results",
+              as: "rar",
+              cond: {
+                $eq: ["$$rar.rarity", "UR+"],
+              },
+            },
+          },
+          UR: {
+            $filter: {
+              input: "$results",
+              as: "rar",
+              cond: {
+                $eq: ["$$rar.rarity", "UR"],
+              },
+            },
+          },
+          SSR: {
+            $filter: {
+              input: "$results",
+              as: "rar",
+              cond: {
+                $eq: ["$$rar.rarity", "SSR"],
+              },
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          total: "$total",
+          win: {
+            $add: [
+              {
+                $size: "$UR+",
+              },
+              {
+                $size: "$UR",
+              },
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          luck: {
+            $cond: [
+              {
+                $ne: ["$win", 0],
+              },
+              {
+                $divide: ["$win", "$total"],
+              },
+              0,
+            ],
+          },
+        },
+      },
+      {
+        $match: {
+          _id: uid,
+        },
+      },
+    ];
+    let userLuck = (await summons.aggregate(userLuckPipeline).toArray())[0]
+      .luck;
+    let globalLuckPipeline = [
+      {
+        $group: {
+          _id: "$user",
+          results: {
+            $push: "$$ROOT",
+          },
+        },
+      },
+      {
+        $project: {
+          total: {
+            $size: "$results",
+          },
+          "UR+": {
+            $filter: {
+              input: "$results",
+              as: "rar",
+              cond: {
+                $eq: ["$$rar.rarity", "UR+"],
+              },
+            },
+          },
+          UR: {
+            $filter: {
+              input: "$results",
+              as: "rar",
+              cond: {
+                $eq: ["$$rar.rarity", "UR"],
+              },
+            },
+          },
+          SSR: {
+            $filter: {
+              input: "$results",
+              as: "rar",
+              cond: {
+                $eq: ["$$rar.rarity", "SSR"],
+              },
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          total: "$total",
+          win: {
+            $add: [
+              {
+                $size: "$UR+",
+              },
+              {
+                $size: "$UR",
+              },
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          luck: {
+            $cond: [
+              {
+                $ne: ["$win", 0],
+              },
+              {
+                $divide: ["$win", "$total"],
+              },
+              0,
+            ],
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$luck",
+        },
+      },
+      {
+        $sort: {
+          _id: 1,
+        },
+      },
+    ];
+    let globalLuck = await summons.aggregate(globalLuckPipeline).toArray();
+    globalLuck = globalLuck.map((x) => x._id);
+
+    return Math.round(globalLuck.indexOf(userLuck) / globalLuck.length) * 100;
+  } catch (e) {
+    return 0;
+  }
+}
 
 async function limitSummonResults(uid) {
   try {
