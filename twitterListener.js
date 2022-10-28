@@ -12,7 +12,7 @@ const streamURL =
 
 const rules = [
   {
-    value: "from:ObeyMeOfficial -is:reply -is:nullcast", // -is:retweet
+    value: "from:ObeyMeOfficial -is:reply", // -is:nullcast -is:retweet
   },
   {
     value: "from:ObeyMeOfficial1 -is:reply -is:nullcast", // -is:retweet
@@ -103,8 +103,12 @@ function streamConnect(retryAttempt) {
           (x) => x.id == json.data.author_id
         ).username;
         const lang = username == "ObeyMeOfficial1" ? "en" : "ja";
-        discordController.sendTwitterUpdates(
-          lang,
+        // discordController.sendTwitterUpdates(
+        //   lang,
+        //   `https://twitter.com/${username}/status/${tweetId}`
+        // );
+        discordController.sendMessage(
+          "1022190209179328655",
           `https://twitter.com/${username}/status/${tweetId}`
         );
 
