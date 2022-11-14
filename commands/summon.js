@@ -41,6 +41,8 @@ module.exports = {
         embeds: [
           {
             title: "Nightmare not found!",
+            description:
+              "Please check https://obey-me-info.herokuapp.com/names for available nightmares.",
           },
         ],
       });
